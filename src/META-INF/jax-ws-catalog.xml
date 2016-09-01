@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://desktop-fbdk74t:8080/OrderApplication" uri="wsdl/desktop-fbdk74t_8080/OrderApplication/index"/>
+    <system systemId="http://desktop-fbdk74t:8080/OrderApplication/OrderWebService?wsdl" uri="wsdl/desktop-fbdk74t_8080/OrderApplication/OrderWebService.wsdl"/>
+    <system systemId="http://desktop-fbdk74t:8080/OrderApplication/OrderWebService?xsd=1" uri="wsdl/desktop-fbdk74t_8080/OrderApplication/OrderWebService.xsd_1.xsd"/>
+</catalog>
