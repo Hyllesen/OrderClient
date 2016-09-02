@@ -4,14 +4,17 @@
 <xsd:import namespace="http://dtu.dk/" schemaLocation="http://desktop-fbdk74t:8080/OrderApplication/OrderWebService?xsd=1"/>
 </xsd:schema>
 </types>
-<message name="payOrder">
-<part name="parameters" element="tns:payOrder"/>
+<message name="isOrderPaid">
+<part name="parameters" element="tns:isOrderPaid"/>
 </message>
-<message name="orderProduct">
-<part name="parameters" element="tns:orderProduct"/>
+<message name="isOrderPaidResponse">
+<part name="parameters" element="tns:isOrderPaidResponse"/>
 </message>
-<message name="orderProductResponse">
-<part name="parameters" element="tns:orderProductResponse"/>
+<message name="getOrderObject">
+<part name="parameters" element="tns:getOrderObject"/>
+</message>
+<message name="getOrderObjectResponse">
+<part name="parameters" element="tns:getOrderObjectResponse"/>
 </message>
 <message name="getOrderInfo">
 <part name="parameters" element="tns:getOrderInfo"/>
@@ -19,28 +22,48 @@
 <message name="getOrderInfoResponse">
 <part name="parameters" element="tns:getOrderInfoResponse"/>
 </message>
+<message name="orderProduct">
+<part name="parameters" element="tns:orderProduct"/>
+</message>
+<message name="orderProductResponse">
+<part name="parameters" element="tns:orderProductResponse"/>
+</message>
+<message name="payOrder">
+<part name="parameters" element="tns:payOrder"/>
+</message>
 <portType name="OrderWebService">
-<operation name="payOrder">
-<input wsam:Action="http://dtu.dk/OrderWebService/payOrder" message="tns:payOrder"/>
+<operation name="isOrderPaid">
+<input wsam:Action="http://dtu.dk/OrderWebService/isOrderPaidRequest" message="tns:isOrderPaid"/>
+<output wsam:Action="http://dtu.dk/OrderWebService/isOrderPaidResponse" message="tns:isOrderPaidResponse"/>
 </operation>
-<operation name="orderProduct">
-<input wsam:Action="http://dtu.dk/OrderWebService/orderProductRequest" message="tns:orderProduct"/>
-<output wsam:Action="http://dtu.dk/OrderWebService/orderProductResponse" message="tns:orderProductResponse"/>
+<operation name="getOrderObject">
+<input wsam:Action="http://dtu.dk/OrderWebService/getOrderObjectRequest" message="tns:getOrderObject"/>
+<output wsam:Action="http://dtu.dk/OrderWebService/getOrderObjectResponse" message="tns:getOrderObjectResponse"/>
 </operation>
 <operation name="getOrderInfo">
 <input wsam:Action="http://dtu.dk/OrderWebService/getOrderInfoRequest" message="tns:getOrderInfo"/>
 <output wsam:Action="http://dtu.dk/OrderWebService/getOrderInfoResponse" message="tns:getOrderInfoResponse"/>
 </operation>
+<operation name="orderProduct">
+<input wsam:Action="http://dtu.dk/OrderWebService/orderProductRequest" message="tns:orderProduct"/>
+<output wsam:Action="http://dtu.dk/OrderWebService/orderProductResponse" message="tns:orderProductResponse"/>
+</operation>
+<operation name="payOrder">
+<input wsam:Action="http://dtu.dk/OrderWebService/payOrder" message="tns:payOrder"/>
+</operation>
 </portType>
 <binding name="OrderWebServicePortBinding" type="tns:OrderWebService">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
-<operation name="payOrder">
+<operation name="isOrderPaid">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
 </input>
+<output>
+<soap:body use="literal"/>
+</output>
 </operation>
-<operation name="orderProduct">
+<operation name="getOrderObject">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -57,6 +80,21 @@
 <output>
 <soap:body use="literal"/>
 </output>
+</operation>
+<operation name="orderProduct">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="payOrder">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
 </operation>
 </binding>
 <service name="OrderWebService">

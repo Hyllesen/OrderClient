@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
+import dk.dtu.Order;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -14,10 +9,12 @@ import static org.junit.Assert.*;
 public class OrderWebServiceTest {
     
     String testCustomer = "Jens Test";
-    String testProductId = "1";
+    String testOrderNumber = "1";
     String testProductName = "Sko";
     int testProductAmount = 50;
     String testIsPaid = "Not yet paid";
+    String testCCNumber = "12345";
+    boolean testPaystatus = false;
     
     public OrderWebServiceTest() {
     }
@@ -28,8 +25,8 @@ public class OrderWebServiceTest {
      */
     @Test
     public void orderProductTest() {
-        String result = orderProduct(testProductId, testCustomer, testProductAmount, testProductName);
-        assertEquals(testProductId, result);
+        String result = orderProduct(testOrderNumber, testCustomer, testProductAmount, testProductName);
+        assertEquals(testOrderNumber, result);
     }
     
     /**
@@ -47,10 +44,37 @@ public class OrderWebServiceTest {
      */
     @Test
     public void getOrderInfoTest() {
-        String result = getOrderInfo(testProductId);
-        assertEquals("Order number " + testProductId + ": Customer " + testCustomer + " has ordered " + testProductAmount + " " + testProductName + ". " + testIsPaid, result);  
+        String result = getOrderInfo(testOrderNumber);
+        assertEquals("Order number " + testOrderNumber + ": Customer " + testCustomer + " has ordered " + testProductAmount + " " + testProductName + ". " + testIsPaid, result);  
+    }
+    
+    /**
+     * Returns true if a order is paid
+     */
+    @Test
+    public void isOrderPaidTest() {
+        assertEquals(testPaystatus, isOrderPaid(testOrderNumber));
+        
+    }
+    /**
+     * payOrder is a service that initiates payment by taking as argument a credit
+       card number (string), e.g. ”12345”, and an order number (string).
+     */
+    @Test
+    public void payOrderTest() {
+        payOrder(testCCNumber,testOrderNumber);   
+        assertEquals(true, isOrderPaid(testOrderNumber));
     }
 
+    /**
+     * Assure a order object can be retrieved from web service with order number as input
+     */
+    @Test
+    public void getOrderObjectTest() {
+        Order order = getOrderObject(testOrderNumber);
+        assertEquals(testOrderNumber, order.getOrderNumber());
+    }    
+    
     private static String orderProduct(java.lang.String orderNumber, java.lang.String customerName, int amount, java.lang.String productName) {
         dk.dtu.OrderWebService_Service service = new dk.dtu.OrderWebService_Service();
         dk.dtu.OrderWebService port = service.getOrderWebServicePort();
@@ -67,6 +91,18 @@ public class OrderWebServiceTest {
         dk.dtu.OrderWebService_Service service = new dk.dtu.OrderWebService_Service();
         dk.dtu.OrderWebService port = service.getOrderWebServicePort();
         return port.getOrderInfo(orderNumber);
+    }
+
+    private static Order getOrderObject(java.lang.String orderNumber) {
+        dk.dtu.OrderWebService_Service service = new dk.dtu.OrderWebService_Service();
+        dk.dtu.OrderWebService port = service.getOrderWebServicePort();
+        return port.getOrderObject(orderNumber);
+    }
+
+    private static boolean isOrderPaid(java.lang.String orderNumber) {
+        dk.dtu.OrderWebService_Service service = new dk.dtu.OrderWebService_Service();
+        dk.dtu.OrderWebService port = service.getOrderWebServicePort();
+        return port.isOrderPaid(orderNumber);
     }
     
 }

@@ -4,11 +4,52 @@
 
 <xs:element name="getOrderInfoResponse" type="tns:getOrderInfoResponse"/>
 
+<xs:element name="getOrderObject" type="tns:getOrderObject"/>
+
+<xs:element name="getOrderObjectResponse" type="tns:getOrderObjectResponse"/>
+
+<xs:element name="isOrderPaid" type="tns:isOrderPaid"/>
+
+<xs:element name="isOrderPaidResponse" type="tns:isOrderPaidResponse"/>
+
 <xs:element name="orderProduct" type="tns:orderProduct"/>
 
 <xs:element name="orderProductResponse" type="tns:orderProductResponse"/>
 
 <xs:element name="payOrder" type="tns:payOrder"/>
+
+<xs:complexType name="isOrderPaid">
+<xs:sequence>
+<xs:element name="orderNumber" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="isOrderPaidResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getOrderObject">
+<xs:sequence>
+<xs:element name="orderNumber" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getOrderObjectResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:order" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="order">
+<xs:sequence>
+<xs:element name="amount" type="xs:int"/>
+<xs:element name="customer" type="xs:string" minOccurs="0"/>
+<xs:element name="orderNumber" type="xs:string" minOccurs="0"/>
+<xs:element name="product" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
 
 <xs:complexType name="getOrderInfo">
 <xs:sequence>
