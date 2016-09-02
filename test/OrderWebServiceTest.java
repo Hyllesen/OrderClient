@@ -75,6 +75,11 @@ public class OrderWebServiceTest {
         assertEquals(testOrderNumber, order.getOrderNumber());
     }    
     
+    @Test
+    public void getOrderNotExistingTest() {
+        String result = getOrderInfo("99999");
+    }
+    
     private static String orderProduct(java.lang.String orderNumber, java.lang.String customerName, int amount, java.lang.String productName) {
         dk.dtu.OrderWebService_Service service = new dk.dtu.OrderWebService_Service();
         dk.dtu.OrderWebService port = service.getOrderWebServicePort();
